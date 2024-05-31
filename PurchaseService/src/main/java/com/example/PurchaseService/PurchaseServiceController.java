@@ -1,5 +1,6 @@
 package com.example.PurchaseService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class PurchaseServiceController {
     }
 
     @GetMapping("/PurchaseService/from/{company1}/to/{company2}/item-number/{itemNum}/quantity/{quantity}")
+    @CircuitBreaker(name = "calculatePurchaseBetweenCompanies", fallbackMethod = "calculatePurchaseBetweenCompaniesFallback")
     public PurchaseResponse calculatePurchaseBetweenCompanies(
             @PathVariable String company1,
             @PathVariable String company2,
@@ -56,5 +58,9 @@ public class PurchaseServiceController {
 
         return new PurchaseResponse(1,
                 company1, company2, purchasecost);
+    }
+    public PurchaseResponse calculatePurchaseBetweenCompaniesFallback(Throwable e){
+        return new PurchaseResponse(-1,
+                null, null, Double.MAX_VALUE);
     }
 }
