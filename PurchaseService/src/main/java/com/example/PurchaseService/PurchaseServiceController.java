@@ -29,7 +29,7 @@ public class PurchaseServiceController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Transaction> request = new HttpEntity<>(transaction, headers);
-        String response = restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody();
+        restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody();
     }
 
     @GetMapping("/PurchaseService/from/{company1}/to/{company2}/item-number/{itemNum}/quantity/{quantity}")
@@ -51,6 +51,8 @@ public class PurchaseServiceController {
                         Double.class, uriVariables);
 
         Double purchasecost = responseEntityForPrice.getBody();
+        System.out.println(itemNum + "\t" + quantity);
+        sendTransaction(new Transaction(itemNum, Integer.parseInt(quantity)));
 
         return new PurchaseResponse(1,
                 company1, company2, purchasecost);
