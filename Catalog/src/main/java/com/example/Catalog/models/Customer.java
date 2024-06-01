@@ -3,7 +3,7 @@ package com.example.Catalog.models;
 import java.util.ArrayList;
 
 public class Customer {
-    int id;
+    String id;
     String name;
     Double budget;
     ArrayList<Product> products;
@@ -11,14 +11,19 @@ public class Customer {
     public Customer(){
 
     }
-    public Customer(int id, String name){
+    public Customer(String id, String name, Double budget){
         this.id = id;
         this.name = name;
+        this.budget = budget;
     }
-    public Customer(int id, String name, ArrayList<Product> products){
+    public Customer(String id, String name, Double budget, ArrayList<Product> products){
         this.id = id;
         this.name = name;
+        this.budget = budget;
         this.products = products;
+    }
+    public void updateBudget(Double amount) {
+        this.budget += amount;
     }
     public ArrayList<Product> getProducts() {
         return products;
@@ -28,7 +33,7 @@ public class Customer {
         this.products = products;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -40,7 +45,7 @@ public class Customer {
         return budget;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
