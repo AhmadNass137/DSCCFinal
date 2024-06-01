@@ -57,7 +57,7 @@ public class PurchaseServiceController {
         sendTransaction(new Transaction(itemNum, Integer.parseInt(quantity)));
 
         return new PurchaseResponse(1,
-                company1, company2, purchasecost);
+                company1, company2, purchasecost*Integer.parseInt(quantity));
     }
     public PurchaseResponse calculatePurchaseBetweenCompaniesFallback(Throwable e){
         return new PurchaseResponse(-1,

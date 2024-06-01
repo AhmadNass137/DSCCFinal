@@ -19,8 +19,9 @@ public class ProductTransaction {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public ProductTransaction(String providerID, Product product){
-            this.providerID = providerID;
-            this.product = product;
+
+    public ProductTransaction(String providerID, Product product) {
+        this.providerID = providerID;
+        this.product = product;
     }
 }

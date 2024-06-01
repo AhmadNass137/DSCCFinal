@@ -21,7 +21,13 @@ public class SystemcompanyProducts {
         companyproducts.put("c3",company3);
     }
 
-    
+    public void addcompanyproduct( Product product,String providerID){
+        ArrayList<String> tempArray=new ArrayList<>();
+        if(companyproducts.containsKey(providerID))
+            tempArray.addAll(companyproducts.get(providerID));
+        companyproducts.put(providerID,tempArray);
+        System.out.println("New company Products "+ companyproducts.get(providerID));
+    }
 
     public ArrayList<String> getCompanyproducts(String company_id) {
         return companyproducts.get(company_id);

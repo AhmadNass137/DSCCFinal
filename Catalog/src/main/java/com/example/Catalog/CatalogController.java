@@ -30,5 +30,6 @@ public class CatalogController {
     public void addProduct(@RequestBody ProductTransaction transaction) {
         defalutSystemProducts.addSystemProduct(transaction.getProduct());
         System.out.println("Added Product " + transaction.getProduct().getName());
+        defaultCompaniesProducts.addcompanyproduct(transaction.getProduct(),transaction.getProviderID());
     }
 }

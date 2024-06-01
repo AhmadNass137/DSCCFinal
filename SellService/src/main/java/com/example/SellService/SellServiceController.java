@@ -41,7 +41,8 @@ public class SellServiceController {
         sendProductTransaction(new ProductTransaction(providerID, new Product(itemID, name, Double.parseDouble(price), Integer.parseInt(count))));
         return true;
     }
-    public Boolean AddProductFallback(Throwable e){
+
+    public Boolean AddProductFallback(Throwable e) {
         return false;
     }
 }

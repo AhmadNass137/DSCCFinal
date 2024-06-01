@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="SellService" />
         <module name="PurchaseService" />
         <module name="Catalog" />
         <module name="ApiGateWay" />
@@ -19,6 +20,7 @@
       <module name="Catalog" options="-parameters" />
       <module name="EurekaService" options="-parameters" />
       <module name="PurchaseService" options="-parameters" />
+      <module name="SellService" options="-parameters" />
     </option>
   </component>
 </project>

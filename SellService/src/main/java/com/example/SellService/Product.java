@@ -2,7 +2,7 @@ package com.example.SellService;
 
 public class Product {
 
-    String  id;
+    String id;
     String name;
     Double price;
     int count;
@@ -15,11 +15,11 @@ public class Product {
         this.count = count;
     }
 
-    public Product(String id, String name, Double price,int count){
+    public Product(String id, String name, Double price, int count) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.count= count;
+        this.count = count;
     }
 
     public String getId() {
@@ -30,7 +30,7 @@ public class Product {
         return name;
     }
 
-    public Double getPrice( ) {
+    public Double getPrice() {
         return price;
     }
 
@@ -46,5 +46,7 @@ public class Product {
         this.price = price;
     }
 
-    public void updateCount(int amount) { this.count -= amount; }
+    public void updateCount(int amount) {
+        this.count -= amount;
+    }
 }
