@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/EurekaService/pom.xml" />
         <option value="$PROJECT_DIR$/PurchaseService/pom.xml" />
         <option value="$PROJECT_DIR$/ApiGateWay/pom.xml" />
+        <option value="$PROJECT_DIR$/SellService/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

@@ -32,16 +32,17 @@ public class SellServiceController {
 
     @GetMapping("/SellService/{providerID}/item-number/{itemID}/item-name/{name}/item-price/{price}/item-count/{count}")
     @CircuitBreaker(name = "AddProduct", fallbackMethod = "AddProductFallback")
-    public Boolean AddProduct(
+    public ProductTransaction AddProduct(
             @PathVariable String providerID,
             @PathVariable String itemID,
             @PathVariable String name,
             @PathVariable String price,
             @PathVariable String count) {
         sendProductTransaction(new ProductTransaction(providerID, new Product(itemID, name, Double.parseDouble(price), Integer.parseInt(count))));
-        return true;
+        return new ProductTransaction(providerID, new Product(itemID, name, Double.parseDouble(price), Integer.parseInt(count)));
     }
-    public Boolean AddProductFallback(Throwable e){
-        return false;
+
+    public ProductTransaction AddProductFallback(Throwable e) {
+        return null;
     }
 }

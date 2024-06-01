@@ -20,6 +20,8 @@ public class ApiGateWayConfiguration {
                 .route(p -> p.path("/purchase/**")
                         .uri("lb://PurchaseService"))
                 .route(p -> p.path("/catalog/**")
-                        .uri("lb://Catalog")).build();
+                        .uri("lb://Catalog"))
+                .route(p -> p.path("/sell/**")
+                        .uri("lb://SellService")).build();
     }
 }

@@ -70,10 +70,11 @@ public class PurchaseServiceController {
         updateBudget(new TransactionCost(id1, -1 * total_cost));
         updateBudget(new TransactionCost(id2, total_cost));
         return new PurchaseResponse(1, id1, id2, purchasecost);
+
     }
     public PurchaseResponse calculatePurchaseBetweenCompaniesFallback(Throwable e){
         return new PurchaseResponse(-1,
-                null, null, Double.MAX_VALUE);
+                null, null, Double.MIN_VALUE);
     }
 
 
