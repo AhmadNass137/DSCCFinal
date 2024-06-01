@@ -61,6 +61,6 @@ public class PurchaseServiceController {
     }
     public PurchaseResponse calculatePurchaseBetweenCompaniesFallback(Throwable e){
         return new PurchaseResponse(-1,
-                null, null, Double.MAX_VALUE);
+                null, null, Double.MIN_VALUE);
     }
 }
