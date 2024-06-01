@@ -20,10 +20,15 @@ public class CatalogController {
         return ans.getPrice();
     }
 
-    @PostMapping("/update")
-    public void receiveString(@RequestBody Transaction transaction) {
+    @PostMapping("/updateProduct")
+    public void updateProductAmount(@RequestBody Transaction transaction) {
         System.out.println("Before: " + defalutSystemProducts.getProduct(transaction.getId()).getCount());
         defalutSystemProducts.updateAmount(transaction.getId(), transaction.getAmount());
         System.out.println("After: " + defalutSystemProducts.getProduct(transaction.getId()).getCount());
+    }
+    @PostMapping("/addProduct")
+    public void addProduct(@RequestBody ProductTransaction transaction) {
+        defalutSystemProducts.addSystemProduct(transaction.getProduct());
+        System.out.println("Added Product " + transaction.getProduct().getName());
     }
 }

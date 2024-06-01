@@ -20,6 +20,7 @@ public class Companies {
         this.companies.add(company);
     }
     public Companies() {
+        companies = new ArrayList<>();
         companies.add(new Company(1, "Apple", 200000.0));
         companies.add(new Company(2, "Lamborghini", 300000.0));
         companies.add(new Company(3, "Sketch", 400000.0));

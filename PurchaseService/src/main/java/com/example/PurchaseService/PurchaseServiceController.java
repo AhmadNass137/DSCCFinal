@@ -26,7 +26,7 @@ public class PurchaseServiceController {
     @PostMapping("/send")
     public void sendTransaction(@RequestBody Transaction transaction) {
         System.out.println(transaction.getId() + "\t" + transaction.getAmount());
-        String url = "http://localhost:8082/catalog/update";
+        String url = "http://localhost:8082/catalog/Product";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Transaction> request = new HttpEntity<>(transaction, headers);
