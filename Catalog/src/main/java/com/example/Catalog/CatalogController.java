@@ -1,9 +1,6 @@
 package com.example.Catalog;
 
-import com.example.Catalog.models.Product;
-import com.example.Catalog.models.SystemProducts;
-import com.example.Catalog.models.SystemcompanyProducts;
-import com.example.Catalog.models.Transaction;
+import com.example.Catalog.models.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CatalogController {
     SystemcompanyProducts defaultCompaniesProducts = new SystemcompanyProducts();
     SystemProducts defalutSystemProducts = new SystemProducts();
-
+    Companies companies = new Companies();
     @GetMapping("/GetItemIdPrice/{productID}")
     public double getItemPrice(@PathVariable String productID) {
         Product ans = defalutSystemProducts.getProduct(productID);
