@@ -26,25 +26,35 @@ public class PurchaseServiceController {
     @PostMapping("/send")
     public void sendTransaction(@RequestBody Transaction transaction) {
         System.out.println(transaction.getId() + "\t" + transaction.getAmount());
-        String url = "http://localhost:8082/catalog/Product";
+        String url = "http://localhost:8082/catalog/updateProduct";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Transaction> request = new HttpEntity<>(transaction, headers);
         restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody();
     }
 
-    @GetMapping("/PurchaseService/from/{company1}/to/{company2}/item-number/{itemNum}/quantity/{quantity}")
+    @PostMapping("/update-budget")
+    public void updateBudget(@RequestBody TransactionCost transaction) {
+        System.out.println(transaction.getId() + "\t" + transaction.getCost());
+        String url = "http://localhost:8082/catalog/update-budget";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<TransactionCost> request = new HttpEntity<>(transaction, headers);
+        restTemplate.exchange(url, HttpMethod.POST, request, String.class).getBody();
+    }
+
+    @GetMapping("/PurchaseService/from/{id1}/to/{id2}/item-number/{itemNum}/quantity/{quantity}")
     @CircuitBreaker(name = "calculatePurchaseBetweenCompanies", fallbackMethod = "calculatePurchaseBetweenCompaniesFallback")
     public PurchaseResponse calculatePurchaseBetweenCompanies(
-            @PathVariable String company1,
-            @PathVariable String company2,
+            @PathVariable String id1,
+            @PathVariable String id2,
             @PathVariable String quantity,
             @PathVariable String itemNum
     ) {
 
         HashMap<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("company1", company1);
-        uriVariables.put("company2", company2);
+        uriVariables.put("id1", id1);
+        uriVariables.put("id2", id2);
         uriVariables.put("quantity", quantity);
         uriVariables.put("itemNum", itemNum);
 
@@ -53,14 +63,19 @@ public class PurchaseServiceController {
                         Double.class, uriVariables);
 
         Double purchasecost = responseEntityForPrice.getBody();
-        System.out.println(itemNum + "\t" + quantity);
-        sendTransaction(new Transaction(itemNum, Integer.parseInt(quantity)));
 
-        return new PurchaseResponse(1,
-                company1, company2, purchasecost*Integer.parseInt(quantity));
+        Double total_cost = purchasecost * Integer.parseInt(quantity);
+
+        sendTransaction(new Transaction(itemNum, Integer.parseInt(quantity)));
+        updateBudget(new TransactionCost(id1, -1 * total_cost));
+        updateBudget(new TransactionCost(id2, total_cost));
+        return new PurchaseResponse(1, id1, id2, purchasecost);
+
     }
     public PurchaseResponse calculatePurchaseBetweenCompaniesFallback(Throwable e){
         return new PurchaseResponse(-1,
                 null, null, Double.MIN_VALUE);
     }
+
+
 }
